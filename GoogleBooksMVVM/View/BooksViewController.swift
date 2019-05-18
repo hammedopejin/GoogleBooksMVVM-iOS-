@@ -57,6 +57,7 @@ class BooksViewController: UIViewController {
 }
 
 extension BooksViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.books.count
     }
@@ -80,10 +81,14 @@ extension BooksViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        resultSearchController.dismiss(animated: true, completion: nil)
+        
         viewModel.currentBook = viewModel.books[indexPath.row]
+        
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         vc.viewModel = viewModel
-        resultSearchController.dismiss(animated: true, completion: nil)
+        vc.hidesBottomBarWhenPushed = true
+        
         navigationController?.pushViewController(vc, animated: true)
     }
 }

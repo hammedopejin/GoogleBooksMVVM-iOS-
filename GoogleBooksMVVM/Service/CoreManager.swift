@@ -9,10 +9,10 @@
 import UIKit
 import CoreData
 
-let dataService = DataService.sharedInstance
-final class DataService {
+let coreManager = CoreManager.sharedInstance
+final class CoreManager {
     
-    static let sharedInstance = DataService()
+    static let sharedInstance = CoreManager()
     private init() {}
     
     var context: NSManagedObjectContext {
