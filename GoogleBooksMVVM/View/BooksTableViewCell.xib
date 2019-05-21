@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="BooksTableViewCell" customModule="GoogleBooks" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="BooksTableViewCell" customModule="GoogleBooksMVVM" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -22,28 +22,27 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hgk-6u-eJB">
                         <rect key="frame" x="8" y="5" width="120" height="108"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="Hgk-6u-eJB" secondAttribute="height" multiplier="10:9" id="9dV-yU-R63"/>
-                            <constraint firstAttribute="height" constant="108" id="axI-f0-GaK"/>
-                            <constraint firstAttribute="width" secondItem="Hgk-6u-eJB" secondAttribute="height" multiplier="10:9" id="vYo-BM-udM"/>
+                            <constraint firstAttribute="width" secondItem="Hgk-6u-eJB" secondAttribute="height" multiplier="10:9" id="5Fz-cn-h6g"/>
+                            <constraint firstAttribute="height" constant="108" id="GN2-md-lQ6"/>
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wPM-7h-ISA">
-                        <rect key="frame" x="136" y="25" width="258" height="69"/>
+                        <rect key="frame" x="136" y="25" width="257" height="69"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cic-1X-xBv">
-                                <rect key="frame" x="0.0" y="0.0" width="258" height="21.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="257" height="21.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1y-jd-WAW">
-                                <rect key="frame" x="0.0" y="29.5" width="258" height="17"/>
+                                <rect key="frame" x="0.0" y="29.5" width="257" height="17"/>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qnS-Wb-rhQ">
-                                <rect key="frame" x="0.0" y="54.5" width="258" height="14.5"/>
+                                <rect key="frame" x="0.0" y="54.5" width="257" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -52,14 +51,13 @@
                     </stackView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Hgk-6u-eJB" secondAttribute="bottom" constant="6.5" id="2P6-jY-Rop"/>
                     <constraint firstAttribute="bottom" secondItem="wPM-7h-ISA" secondAttribute="bottom" constant="25.5" id="A7R-Dk-jJI"/>
-                    <constraint firstAttribute="trailing" secondItem="Hgk-6u-eJB" secondAttribute="trailing" constant="273" id="UpL-ep-5WR"/>
-                    <constraint firstItem="Hgk-6u-eJB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="bjD-l2-CjN"/>
+                    <constraint firstItem="Hgk-6u-eJB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="AiV-fb-Ma7"/>
+                    <constraint firstItem="Hgk-6u-eJB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="NOP-97-hd8"/>
                     <constraint firstAttribute="trailing" secondItem="wPM-7h-ISA" secondAttribute="trailing" constant="7" id="gv5-7t-dnI"/>
-                    <constraint firstItem="Hgk-6u-eJB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="ja0-Uf-fgN"/>
+                    <constraint firstItem="wPM-7h-ISA" firstAttribute="leading" secondItem="Hgk-6u-eJB" secondAttribute="trailing" constant="8" id="paq-1h-Aia"/>
                     <constraint firstItem="wPM-7h-ISA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="szS-EN-vB0"/>
-                    <constraint firstItem="wPM-7h-ISA" firstAttribute="leading" secondItem="Hgk-6u-eJB" secondAttribute="trailing" constant="8" id="v3s-pc-zbS"/>
-                    <constraint firstAttribute="bottom" secondItem="Hgk-6u-eJB" secondAttribute="bottom" constant="8" id="xmb-Sl-2lB"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

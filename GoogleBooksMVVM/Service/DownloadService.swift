@@ -59,34 +59,30 @@ final class DownloadService {
         
     }
     
-    func getBooks(searchTerm: String, vc: UIViewController, completion: @escaping bookHandler) {
+    func getBooks(searchTerm: String, completion: @escaping bookHandler) {
         let endpoint = "https://www.googleapis.com/books/v1/volumes?q=\(searchTerm)"
         let escapedEndpoint = endpoint.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         guard let url = URL(string: escapedEndpoint!) else {
-            completion(nil)
+            completion([])
             return
         }
         
         URLSession.shared.dataTask(with: url) { (data, _, err) in
             if let error = err {
                 print(error)
-                completion(nil)
+                DispatchQueue.main.async {
+                    completion([])
+                }
                 return
             }
             
             if let data = data {
                 do {
-                    if let jsonObjectCount = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let bookCount = jsonObjectCount["totalItems"] as? Int {
-                        if bookCount == 0 {
-                            print("No Results")
-                            DispatchQueue.main.async {
-                                vc.showAlert(title: "No Result!", message: "No book match the search criteria you entered, please try another search term")
-                                completion(nil)
-                            }
-                        }
-                    }
                     guard let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let bookArray = jsonObject["items"] as? [[String: Any]] else {
                         print("Bad Json Format Error!")
+                        DispatchQueue.main.async {
+                            completion([])
+                        }
                         return
                     }
                     

@@ -10,6 +10,7 @@ import UIKit
 
 protocol BooksViewModelDelegate: class {
     func updateView()
+    func showUpdateAlert()
 }
 
 class BooksViewModel {
@@ -19,14 +20,15 @@ class BooksViewModel {
     private(set) var books = [Book]() {
         didSet {
             delegate?.updateView()
+            delegate?.showUpdateAlert()
         }
     }
     
     var currentBook: Book!
     
-    func get(searchTerm: String, vc: UIViewController) {
+    func get(searchTerm: String) {
     
-        downloadService.getBooks(searchTerm: searchTerm, vc: vc) { [unowned self] bks in
+        downloadService.getBooks(searchTerm: searchTerm) { [unowned self] bks in
             
             if let books = bks {
                 self.books = books

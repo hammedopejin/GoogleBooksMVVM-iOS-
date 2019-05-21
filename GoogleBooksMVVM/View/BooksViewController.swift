@@ -96,8 +96,14 @@ extension BooksViewController: UITableViewDelegate {
 //MARK: BooksViewModelDelegate
 extension BooksViewController: BooksViewModelDelegate {
     
+    func showUpdateAlert() {
+        if self.viewModel.books.isEmpty {
+            self.showAlert(title: "No Result!", message: "No book match the search criteria you entered, please try another search term")
+        }
+    }
+    
     func updateView() {
-        booksTableview.reloadData()
+        self.booksTableview.reloadData()
     }
 }
 
@@ -106,7 +112,7 @@ extension BooksViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         resultSearchController.dismiss(animated: true, completion: nil)
         if let searchTerm = searchBar.text {
-          viewModel.get(searchTerm: searchTerm, vc: self)
+          viewModel.get(searchTerm: searchTerm)
         }
     }
     

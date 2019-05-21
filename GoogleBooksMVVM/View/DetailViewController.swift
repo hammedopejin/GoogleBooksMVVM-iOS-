@@ -20,64 +20,46 @@ class DetailViewController: UIViewController {
     var viewModel: BooksViewModel!
     var favoriteViewModel: FavoritesViewModel!
     var flag = false
+    var book: Book!
+    
+    var isFavorite: Bool {
+        return viewModel == nil
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupBook()
         bindViews()
+    }
+    
+    func setupBook() {
+        switch isFavorite {
+        case true:
+            book = favoriteViewModel.currentBook
+        default:
+            book = viewModel.currentBook
+        }
     }
     
     func bindViews() {
         
-        if viewModel != nil {
-            bookTitle.text = viewModel.currentBook.title
-            bookAuthors.text = viewModel.currentBook.authors.joined(separator: ", ")
-            bookPublishedDate.text = viewModel.currentBook.publishedDate
-            bookDescription.text = viewModel.currentBook.bookDescription
-            bookPublisher.text = viewModel.currentBook.publisher
+        bookTitle.text = book.title
+        bookAuthors.text = book.authors.joined(separator: ", ")
+        bookPublishedDate.text = book.publishedDate
+        bookDescription.text = book.bookDescription
+        bookPublisher.text = book.publisher
+        
+        let url = book.imageUrl
+        downloadService.downloadImage(url: url) {[unowned self] image in
+            let img = image != nil ? image : #imageLiteral(resourceName: "book")
             
-            let url = viewModel.currentBook.imageUrl
-            downloadService.downloadImage(url: url) {[unowned self] image in
-                let img = image != nil ? image : #imageLiteral(resourceName: "book")
-                
-                DispatchQueue.main.async {
-                    self.bookImage.image = img
-                }
-            }
-            
-            let books = coreManager.getBooks()
-            if books.count > 0 {
-                for bk in books {
-                    if bk.id == viewModel.currentBook.id {
-                        flag = true
-                    }
-                }
-            }
-        } else {
-            bookTitle.text = favoriteViewModel.currentBook.title
-            bookAuthors.text = favoriteViewModel.currentBook.authors.joined(separator: ", ")
-            bookPublishedDate.text = favoriteViewModel.currentBook.publishedDate
-            bookDescription.text = favoriteViewModel.currentBook.bookDescription
-            bookPublisher.text = favoriteViewModel.currentBook.publisher
-            
-            let url = favoriteViewModel.currentBook.imageUrl
-            downloadService.downloadImage(url: url) {[unowned self] image in
-                let img = image != nil ? image : #imageLiteral(resourceName: "book")
-                
-                DispatchQueue.main.async {
-                    self.bookImage.image = img
-                }
-            }
-            
-            let books = coreManager.getBooks()
-            if books.count > 0 {
-                for bk in books {
-                    if bk.id == favoriteViewModel.currentBook.id {
-                        flag = true
-                    }
-                }
+            DispatchQueue.main.async {
+                self.bookImage.image = img
             }
         }
+        
+        flag = coreManager.isFavorite(book.id)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(), style: .plain, target: self, action: #selector(DetailViewController.backAction))
         self.navigationItem.rightBarButtonItem?.setBackgroundImage(resizeImage(image: flag ? #imageLiteral(resourceName: "stargold") : #imageLiteral(resourceName: "starplain"), targetSize: CGSize(width: 100.0, height: 40.0)), for: .normal, barMetrics: .default)

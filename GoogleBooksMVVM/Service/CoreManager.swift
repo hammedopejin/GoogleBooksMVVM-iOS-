@@ -88,12 +88,30 @@ final class CoreManager {
         
     }
     
-    private func saveContext() {
+    func isFavorite(_ id: String) -> Bool {
         
-        do {
-            try context.save()
+        let fetchRequest = NSFetchRequest<CoreBook>(entityName: Entity.Keys.Book.CoreBook.rawValue)
+        let predicate = NSPredicate(format: "id = %@", id)
+        
+        fetchRequest.predicate = predicate
+        var book: CoreBook!
+        
+        do{
+            book = try context.fetch(fetchRequest).first
         } catch {
             print("Error: \(error.localizedDescription)")
+        }
+        
+        return book != nil
+    }
+    
+    private func saveContext() {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                print("Error: \(error.localizedDescription)")
+            }
         }
     }
     
